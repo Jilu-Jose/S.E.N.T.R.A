@@ -1,0 +1,385 @@
+Mood,Current_Workload,Sleeping_Hours,Working_Hours,Deadline_Pressure,Recommended_Task
+Happy,2,9,4,1,Innovation
+Surprise,3,8,5,2,Teamwork
+Neutral,6,11,8,5,Documentation
+Neutral,7,6,9,4,Routine work
+Sad,9,5,12,8,Peer support
+Fear,10,4,14,9,Guided work
+Angry,10,2,16,10,Stress recovery
+Happy,1,10,2,0,Creative brainstorming
+Disgust,8,5,13,7,Light tasks
+Neutral,5,12,7,6,Learning
+Happy,4,8,6,3,Creative brainstorming
+Sad,8,5,11,7,Light tasks
+Fear,9,4,13,9,Guided work
+Angry,10,1,15,10,Break
+Surprise,0,9,3,2,Innovation
+Neutral,6,7,9,5,Documentation
+Sad,10,5,12,8,Peer support
+Happy,3,9,5,1,Teamwork
+Angry,9,3,15,9,Physical activity
+Fear,8,4,13,8,Guided work
+Disgust,9,5,11,9,Light tasks
+Surprise,2,10,4,3,Creative brainstorming
+Neutral,7,12,8,6,Routine work
+Happy,1,8,2,2,Innovation
+Angry,10,0,16,10,Stress recovery
+Sad,9,5,13,8,Peer support
+Neutral,5,6,7,4,Learning
+Happy,4,9,5,3,Teamwork
+Surprise,3,8,6,1,Creative brainstorming
+Fear,10,3,14,9,Guided work
+Disgust,8,4,12,8,Light tasks
+Neutral,6,11,9,5,Documentation
+Happy,0,10,3,0,Innovation
+Angry,9,2,15,10,Break
+Sad,10,5,13,9,Peer support
+Neutral,7,7,8,6,Routine work
+Surprise,2,9,4,2,Teamwork
+Happy,1,8,5,1,Creative brainstorming
+Fear,9,4,12,8,Guided work
+Disgust,10,3,14,9,Light tasks
+Angry,10,1,16,10,Physical activity
+Neutral,5,12,7,5,Learning
+Happy,3,10,2,2,Innovation
+Sad,8,5,11,7,Peer support
+Surprise,4,9,6,3,Teamwork
+Neutral,6,6,9,4,Documentation
+Fear,10,2,15,10,Stress recovery
+Happy,2,8,3,1,Creative brainstorming
+Disgust,9,4,13,8,Light tasks
+Angry,9,0,14,9,Break
+Neutral,7,11,8,6,Routine work
+Happy,0,9,4,2,Innovation
+Sad,10,5,12,9,Guided work
+Surprise,1,10,5,3,Teamwork
+Fear,8,3,11,8,Peer support
+Neutral,5,7,7,5,Learning
+Angry,10,2,16,10,Physical activity
+Happy,3,8,2,1,Creative brainstorming
+Disgust,9,4,13,9,Light tasks
+Surprise,2,9,6,2,Innovation
+Neutral,6,12,9,4,Documentation
+Sad,10,5,14,8,Guided work
+Happy,4,10,3,3,Teamwork
+Fear,9,3,12,9,Peer support
+Angry,10,1,15,10,Stress recovery
+Neutral,7,6,8,5,Routine work
+Surprise,0,8,4,1,Creative brainstorming
+Happy,1,9,5,2,Innovation
+Disgust,8,4,11,7,Light tasks
+Neutral,5,11,7,6,Learning
+Sad,9,5,13,9,Guided work
+Fear,10,2,14,10,Peer support
+Angry,9,0,16,9,Break
+Happy,2,10,2,0,Teamwork
+Surprise,3,8,6,3,Creative brainstorming
+Neutral,6,7,9,4,Documentation
+Happy,0,9,3,1,Innovation
+Sad,10,4,12,8,Light tasks
+Fear,8,3,13,9,Guided work
+Disgust,9,5,11,8,Peer support
+Angry,10,2,15,10,Physical activity
+Neutral,7,12,8,5,Routine work
+Happy,4,8,5,2,Teamwork
+Surprise,1,10,4,2,Creative brainstorming
+Neutral,5,6,7,6,Learning
+Sad,9,4,14,9,Guided work
+Fear,10,1,16,10,Stress recovery
+Happy,2,9,2,1,Innovation
+Angry,9,3,13,9,Break
+Disgust,8,5,12,8,Light tasks
+Neutral,6,11,9,4,Documentation
+Surprise,3,8,6,3,Teamwork
+Happy,0,10,3,0,Creative brainstorming
+Sad,10,4,11,9,Peer support
+Fear,9,2,15,10,Stress recovery
+Neutral,7,7,8,5,Routine work
+Angry,10,0,14,9,Physical activity
+Happy,1,9,5,2,Innovation
+Disgust,8,5,13,8,Light tasks
+Neutral,5,12,7,6,Learning
+Surprise,4,8,4,3,Teamwork
+Sad,9,4,12,9,Guided work
+Happy,2,10,2,1,Creative brainstorming
+Fear,10,3,16,10,Break
+Angry,9,1,15,9,Stress recovery
+Neutral,6,6,9,5,Documentation
+Happy,3,9,6,2,Innovation
+Disgust,9,4,11,8,Peer support
+Surprise,0,8,3,1,Teamwork
+Neutral,7,11,8,4,Routine work
+Sad,10,5,13,9,Light tasks
+Fear,8,2,14,10,Guided work
+Happy,1,10,5,0,Creative brainstorming
+Angry,10,0,16,9,Physical activity
+Neutral,5,7,7,6,Learning
+Happy,4,9,4,3,Innovation
+Surprise,2,8,2,2,Teamwork
+Sad,9,3,12,8,Peer support
+Disgust,8,5,11,7,Light tasks
+Neutral,6,12,9,5,Documentation
+Fear,10,4,15,10,Stress recovery
+Happy,0,10,6,1,Creative brainstorming
+Angry,9,1,13,9,Break
+Neutral,7,6,8,4,Routine work
+Surprise,3,9,3,2,Innovation
+Sad,10,4,14,9,Guided work
+Happy,1,8,5,2,Teamwork
+Disgust,9,5,12,8,Light tasks
+Fear,8,2,16,10,Physical activity
+Neutral,5,11,7,5,Learning
+Angry,10,3,15,9,Stress recovery
+Happy,2,10,4,1,Creative brainstorming
+Surprise,4,8,2,3,Innovation
+Sad,9,4,11,8,Peer support
+Neutral,6,7,9,6,Documentation
+Happy,0,9,6,0,Teamwork
+Fear,10,1,13,10,Break
+Disgust,8,5,14,9,Guided work
+Angry,9,0,16,9,Physical activity
+Neutral,7,12,8,5,Routine work
+Happy,3,8,3,2,Creative brainstorming
+Sad,10,3,12,8,Light tasks
+Surprise,1,10,5,1,Innovation
+Neutral,5,6,7,4,Learning
+Fear,9,4,15,10,Stress recovery
+Happy,4,9,2,3,Teamwork
+Angry,10,2,14,9,Break
+Disgust,8,5,11,7,Peer support
+Neutral,6,11,9,6,Documentation
+Happy,2,8,4,2,Creative brainstorming
+Sad,9,4,13,8,Guided work
+Surprise,0,10,6,1,Innovation
+Neutral,7,7,8,5,Routine work
+Fear,10,1,16,10,Physical activity
+Happy,1,9,3,0,Teamwork
+Angry,9,3,12,9,Stress recovery
+Disgust,9,4,14,8,Light tasks
+Neutral,5,12,7,4,Learning
+Happy,3,8,5,2,Creative brainstorming
+Sad,10,5,11,9,Peer support
+Surprise,2,10,2,3,Innovation
+Neutral,6,6,9,5,Documentation
+Fear,8,2,15,10,Guided work
+Angry,10,0,13,9,Break
+Happy,4,9,4,1,Teamwork
+Disgust,8,5,12,8,Light tasks
+Neutral,7,11,8,6,Routine work
+Sad,9,4,16,9,Physical activity
+Happy,0,8,6,2,Creative brainstorming
+Surprise,3,10,3,1,Innovation
+Fear,10,3,14,10,Stress recovery
+Neutral,5,7,7,5,Learning
+Angry,9,1,15,9,Break
+Happy,1,9,5,0,Teamwork
+Sad,10,5,11,8,Peer support
+Disgust,9,4,13,9,Guided work
+Neutral,6,12,9,4,Documentation
+Surprise,2,8,2,3,Creative brainstorming
+Happy,3,10,4,2,Innovation
+Fear,8,2,16,10,Physical activity
+Angry,10,0,12,9,Stress recovery
+Neutral,7,6,8,5,Routine work
+Sad,9,3,14,8,Light tasks
+Happy,4,9,6,1,Teamwork
+Disgust,8,5,11,7,Peer support
+Surprise,0,8,3,2,Creative brainstorming
+Neutral,5,11,7,6,Learning
+Fear,10,4,15,9,Guided work
+Happy,2,10,5,1,Innovation
+Angry,9,1,13,10,Break
+Sad,10,5,12,8,Light tasks
+Neutral,6,7,9,5,Documentation
+Happy,1,9,2,0,Teamwork
+Surprise,3,8,4,3,Creative brainstorming
+Disgust,9,4,16,9,Physical activity
+Neutral,7,12,8,4,Routine work
+Fear,8,2,14,10,Stress recovery
+Happy,0,10,6,2,Innovation
+Angry,10,3,15,9,Break
+Sad,9,5,11,8,Peer support
+Neutral,5,6,7,5,Learning
+Happy,4,8,3,1,Teamwork
+Disgust,8,4,13,9,Guided work
+Surprise,2,9,5,3,Creative brainstorming
+Neutral,6,11,9,6,Documentation
+Fear,10,1,12,10,Physical activity
+Happy,3,10,4,2,Innovation
+Angry,9,0,14,9,Stress recovery
+Sad,10,3,15,8,Light tasks
+Neutral,7,7,8,5,Routine work
+Happy,1,8,2,0,Teamwork
+Surprise,0,9,6,1,Creative brainstorming
+Disgust,9,5,11,7,Peer support
+Fear,8,4,13,9,Guided work
+Neutral,5,12,7,4,Learning
+Angry,10,2,16,10,Break
+Happy,2,10,5,2,Innovation
+Sad,9,5,12,8,Light tasks
+Surprise,4,8,3,3,Teamwork
+Neutral,6,6,9,5,Documentation
+Happy,3,9,4,1,Creative brainstorming
+Fear,10,1,15,9,Stress recovery
+Angry,9,3,14,10,Physical activity
+Neutral,7,11,8,6,Routine work
+Disgust,8,4,13,8,Guided work
+Happy,0,10,2,0,Innovation
+Sad,10,5,11,9,Peer support
+Surprise,1,8,6,2,Teamwork
+Neutral,5,7,7,5,Learning
+Fear,9,2,12,10,Break
+Happy,4,9,5,3,Creative brainstorming
+Angry,10,0,16,9,Stress recovery
+Disgust,9,3,14,8,Light tasks
+Neutral,6,12,9,4,Documentation
+Happy,2,8,3,1,Innovation
+Sad,9,4,15,9,Guided work
+Surprise,3,10,4,2,Teamwork
+Neutral,7,6,8,5,Routine work
+Fear,10,1,13,10,Physical activity
+Happy,1,9,6,0,Creative brainstorming
+Angry,9,2,12,9,Break
+Disgust,8,5,11,7,Peer support
+Neutral,5,11,7,6,Learning
+Sad,10,5,14,8,Light tasks
+Happy,0,10,2,2,Innovation
+Surprise,2,8,5,3,Teamwork
+Fear,8,3,16,10,Stress recovery
+Neutral,6,7,9,5,Documentation
+Happy,3,9,3,1,Creative brainstorming
+Angry,10,4,15,9,Physical activity
+Disgust,9,4,13,8,Guided work
+Neutral,7,12,8,4,Routine work
+Sad,9,5,12,9,Peer support
+Happy,4,8,4,2,Teamwork
+Surprise,1,10,6,2,Innovation
+Fear,10,2,14,10,Break
+Neutral,5,6,7,5,Learning
+Angry,9,1,11,9,Stress recovery
+Happy,2,9,5,1,Creative brainstorming
+Sad,10,3,13,8,Light tasks
+Disgust,8,5,15,9,Guided work
+Neutral,6,11,9,6,Documentation
+Happy,0,10,3,0,Teamwork
+Surprise,3,8,2,3,Innovation
+Fear,9,4,16,10,Physical activity
+Neutral,7,7,8,5,Routine work
+Angry,10,0,12,9,Break
+Happy,1,9,4,2,Creative brainstorming
+Sad,9,5,14,8,Peer support
+Disgust,9,3,11,7,Light tasks
+Neutral,5,12,7,4,Learning
+Surprise,2,8,6,1,Teamwork
+Happy,4,10,5,3,Innovation
+Fear,10,2,13,10,Stress recovery
+Neutral,6,6,9,5,Documentation
+Angry,9,1,15,9,Physical activity
+Happy,3,9,2,1,Creative brainstorming
+Sad,10,4,12,9,Guided work
+Disgust,8,5,14,8,Peer support
+Neutral,7,11,8,6,Routine work
+Happy,0,8,3,0,Teamwork
+Surprise,1,10,4,2,Innovation
+Fear,8,3,16,10,Break
+Neutral,5,7,7,5,Learning
+Angry,10,2,11,9,Stress recovery
+Happy,2,9,5,2,Creative brainstorming
+Sad,9,5,13,8,Light tasks
+Disgust,9,4,15,9,Guided work
+Neutral,6,12,9,4,Documentation
+Happy,4,10,6,1,Teamwork
+Surprise,3,8,3,3,Innovation
+Fear,10,1,14,10,Physical activity
+Neutral,7,6,8,5,Routine work
+Angry,9,0,12,9,Break
+Happy,1,9,2,0,Creative brainstorming
+Sad,10,5,11,8,Peer support
+Disgust,8,3,13,7,Light tasks
+Neutral,5,11,7,6,Learning
+Surprise,0,8,5,2,Teamwork
+Happy,3,10,4,2,Innovation
+Fear,9,4,16,10,Stress recovery
+Neutral,6,7,9,5,Documentation
+Angry,10,2,15,9,Physical activity
+Happy,2,9,3,1,Creative brainstorming
+Sad,9,4,12,9,Guided work
+Disgust,9,5,14,8,Peer support
+Neutral,7,12,8,4,Routine work
+Happy,0,8,6,0,Teamwork
+Surprise,1,10,2,3,Innovation
+Fear,8,1,13,10,Break
+Neutral,5,6,7,5,Learning
+Angry,9,3,11,9,Stress recovery
+Happy,4,9,5,2,Creative brainstorming
+Sad,10,5,15,8,Light tasks
+Disgust,8,4,12,9,Guided work
+Neutral,6,11,9,6,Documentation
+Happy,2,10,4,1,Teamwork
+Surprise,3,8,3,3,Innovation
+Fear,10,2,16,10,Physical activity
+Neutral,7,7,8,5,Routine work
+Angry,9,0,14,9,Break
+Happy,1,9,2,2,Creative brainstorming
+Sad,9,5,13,8,Peer support
+Disgust,9,3,11,7,Light tasks
+Neutral,5,12,7,4,Learning
+Surprise,0,8,6,1,Teamwork
+Happy,3,10,5,0,Innovation
+Fear,8,4,15,10,Stress recovery
+Neutral,6,6,9,5,Documentation
+Angry,10,1,12,9,Physical activity
+Happy,4,9,3,1,Creative brainstorming
+Sad,10,4,14,9,Guided work
+Disgust,8,5,13,8,Peer support
+Neutral,7,11,8,6,Routine work
+Happy,2,8,4,2,Teamwork
+Surprise,1,10,2,3,Innovation
+Fear,10,2,16,10,Break
+Neutral,5,7,7,5,Learning
+Angry,9,3,11,9,Stress recovery
+Happy,0,9,5,0,Creative brainstorming
+Sad,9,5,12,8,Light tasks
+Disgust,9,4,15,9,Guided work
+Neutral,6,12,9,4,Documentation
+Happy,3,10,6,2,Teamwork
+Surprise,2,8,3,1,Innovation
+Fear,8,1,14,10,Physical activity
+Neutral,7,6,8,5,Routine work
+Angry,10,0,13,9,Break
+Happy,1,9,2,2,Creative brainstorming
+Sad,10,5,11,8,Peer support
+Disgust,8,3,12,7,Light tasks
+Neutral,5,11,7,6,Learning
+Surprise,4,8,5,3,Teamwork
+Happy,2,10,4,1,Innovation
+Fear,10,2,16,10,Stress recovery
+Neutral,6,7,9,5,Documentation
+Angry,9,1,15,9,Physical activity
+Happy,0,9,3,0,Creative brainstorming
+Sad,9,4,13,9,Guided work
+Disgust,9,5,14,8,Peer support
+Neutral,7,12,8,4,Routine work
+Happy,3,8,6,2,Teamwork
+Surprise,1,10,2,3,Innovation
+Fear,8,3,11,10,Break
+Neutral,5,6,7,5,Learning
+Angry,10,0,12,9,Stress recovery
+Happy,4,9,5,1,Creative brainstorming
+Sad,10,5,15,8,Light tasks
+Disgust,8,4,13,9,Guided work
+Neutral,6,11,9,6,Documentation
+Happy,2,10,4,2,Teamwork
+Surprise,3,8,3,3,Innovation
+Fear,10,1,16,10,Physical activity
+Neutral,7,7,8,5,Routine work
+Angry,9,2,14,9,Break
+Happy,1,9,2,0,Creative brainstorming
+Sad,9,5,12,8,Peer support
+Disgust,9,3,11,7,Light tasks
+Neutral,5,12,7,4,Learning
+Surprise,0,8,6,1,Teamwork
+Happy,3,10,5,2,Innovation
+Fear,8,4,15,10,Stress recovery
+Neutral,6,6,9,5,Documentation
+Angry,10,0,13,9,Physical activity

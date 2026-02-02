@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS mood_logs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp TEXT,
     employee_id TEXT,
-    emotion TEXT
+    emotion TEXT,
+    recommended_task TEXT
 )
 """)
 
