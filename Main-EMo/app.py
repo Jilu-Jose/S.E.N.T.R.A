@@ -70,7 +70,7 @@ def send_hr_alert(employee_id, emotion):
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            smtp.login("EMAIL_ID", "PASSWORD")
+            smtp.login("EMAIL_ID", "EMAIL_PASSWORD")
             smtp.send_message(msg)
     except Exception as e:
         print(f"Email error: {e}")
