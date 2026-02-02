@@ -4,6 +4,22 @@ A real-time Emotion Detection System that analyzes facial expressions using a de
 
 ---
 
+## Email Configuration (Important)
+
+This project sends email alerts, so you must provide your own email credentials in the `app.py` file before running the application.
+
+### Step 1: Open `app.py`
+Locate and open the `app.py` file in the project root directory.
+
+### Step 2: Update Email Credentials
+Find the email configuration section and replace the placeholders with your details:
+
+```python
+EMAIL_ID = "your_email@example.com"
+EMAIL_PASSWORD = "your_email_app_password"
+HR_EMAIL = "receiver_email@example.com"
+
+
 ## Features
 
 - Real-time emotion detection using webcam input  
@@ -23,7 +39,8 @@ A real-time Emotion Detection System that analyzes facial expressions using a de
   - TensorFlow / Keras  
   - NumPy  
   - SQLite3  
-  - Streamlit  
+  - HTML5/CSS3
+  - JavaScript  
 
 ---
 
@@ -31,6 +48,8 @@ A real-time Emotion Detection System that analyzes facial expressions using a de
 
 Main-Emo/
 │
+|__ templates
+|    |__ index.html     
 ├── app.py # Main application entry point
 ├── emotion_dec.py # Emotion detection logic
 ├── database.py # Database connection and table creation
