@@ -18,7 +18,58 @@ Find the email configuration section and replace the placeholders with your deta
 EMAIL_ID = "your_email@example.com"
 EMAIL_PASSWORD = "your_email_app_password"
 HR_EMAIL = "receiver_email@example.com"
+```
 
+## Generating Email App Password (Gmail – App Security)
+
+To send email alerts, you must generate an **App Password** from your email provider. Below are the steps for **Gmail**.
+
+### Step 1: Enable 2-Step Verification
+1. Go to your Google Account.
+2. Open **Security** settings.
+3. Enable **2-Step Verification**.
+   - This is mandatory to generate an app password.
+
+### Step 2: Generate App Password
+1. In Google Account → **Security**
+2. Go to **App passwords**
+3. Select:
+   - App: **Mail**
+   - Device: **Windows Computer**
+4. Click **Generate**
+5. Google will provide a **16-character password**
+
+### Step 3: Use App Password in `app.py`
+Paste the generated password in your code:
+```python
+SENDER_PASSWORD = "your_16_character_app_password"
+```
+
+## Running the Project in VS Code
+
+### Step 1: Open Integrated Terminal
+- Open Visual Studio Code
+- Press Ctrl + ` (backtick)
+  OR
+- Go to Terminal → New Terminal
+
+### Step 2: Change Directory
+Navigate to the project folder:
+```python
+cd Main-EMo
+```
+### Step 3: Activate Virtual Environment
+Activate the Python virtual environment:
+```python
+.\venv\Scripts\activate
+```
+You should see (venv) in the terminal.
+
+### Step 4: Run the Application
+Run the project using:
+```python
+python app.py
+```
 
 ## Features
 
