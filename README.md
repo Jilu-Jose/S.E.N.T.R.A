@@ -134,5 +134,4 @@ The database file is created automatically when the application runs.
 ```bash
 git clone https://github.com/your-username/EMO-DETECTION-AMDOX.git
 cd EMO-DETECTION-AMDOX
-
-
+```
