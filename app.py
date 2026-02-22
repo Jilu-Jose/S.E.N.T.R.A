@@ -284,35 +284,7 @@ def get_analytics():
         'hourly_distribution': hourly
     })
 
-# Newly Added Function
-# @app.route("/predict", methods=["POST"])
-# def predict():
-#     global current_emotion, current_task, stress_count, alert_active
 
-#     data = request.json["image"]
-#     encoded = data.split(",")[1]
-#     decoded = base64.b64decode(encoded)
-
-#     np_img = np.frombuffer(decoded, np.uint8)
-#     frame = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
-
-#     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-#     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
-#     for (x, y, w, h) in faces:
-#         face = gray[y:y+h, x:x+w]
-#         face = cv2.resize(face, (64, 64))
-#         face = face / 255.0
-#         face = face.reshape(1, 64, 64, 1)
-
-#         preds = emotion_model.predict(face, verbose=0)
-#         emotion = emotion_labels[np.argmax(preds)]
-
-#         current_emotion = emotion
-
-#         return jsonify({"emotion": emotion})
-
-#     return jsonify({"emotion": "No face detected"})
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True, host='0.0.0.0', port=10000)
