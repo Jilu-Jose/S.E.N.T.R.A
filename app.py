@@ -84,93 +84,93 @@ def send_hr_alert(employee_id, emotion):
         print(f"Email error: {e}")
 
 
-# def generate_frames():
-#     global current_emotion, current_task, stress_count, alert_active
+def generate_frames():
+    global current_emotion, current_task, stress_count, alert_active
     
-#     cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)
     
-#     while True:
-#         ret, frame = cap.read()
-#         if not ret:
-#             break
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
             
-#         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-#         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         
-#         for (x, y, w, h) in faces:
-#             face = gray[y:y+h, x:x+w]
-#             face = cv2.resize(face, (64, 64))
-#             face = face / 255.0
-#             face = face.reshape(1, 64, 64, 1)
+        for (x, y, w, h) in faces:
+            face = gray[y:y+h, x:x+w]
+            face = cv2.resize(face, (64, 64))
+            face = face / 255.0
+            face = face.reshape(1, 64, 64, 1)
             
-#             preds = emotion_model.predict(face, verbose=0)
-#             emotion = emotion_labels[np.argmax(preds)]
+            preds = emotion_model.predict(face, verbose=0)
+            emotion = emotion_labels[np.argmax(preds)]
             
             
-#             mapped_mood = emotion_to_mood[emotion]
-#             mood_encoded = mood_encoder.transform([mapped_mood])[0]
+            mapped_mood = emotion_to_mood[emotion]
+            mood_encoded = mood_encoder.transform([mapped_mood])[0]
             
            
-#             current_workload = np.random.randint(3, 8)
-#             sleeping_hours = np.random.randint(5, 9)
-#             working_hours = np.random.randint(6, 10)
-#             deadline_pressure = np.random.randint(2, 8)
+            current_workload = np.random.randint(3, 8)
+            sleeping_hours = np.random.randint(5, 9)
+            working_hours = np.random.randint(6, 10)
+            deadline_pressure = np.random.randint(2, 8)
             
 
-#             task_input = pd.DataFrame([{
-#                 "Mood": mood_encoded,
-#                 "Current_Workload": current_workload,
-#                 "Sleeping_Hours": sleeping_hours,
-#                 "Working_Hours": working_hours,
-#                 "Deadline_Pressure": deadline_pressure
-#             }])
+            task_input = pd.DataFrame([{
+                "Mood": mood_encoded,
+                "Current_Workload": current_workload,
+                "Sleeping_Hours": sleeping_hours,
+                "Working_Hours": working_hours,
+                "Deadline_Pressure": deadline_pressure
+            }])
             
-#             task_encoded = task_model.predict(task_input)
-#             recommended_task = task_encoder.inverse_transform(task_encoded)[0]
+            task_encoded = task_model.predict(task_input)
+            recommended_task = task_encoder.inverse_transform(task_encoded)[0]
             
         
-#             with lock:
-#                 current_emotion = emotion
-#                 current_task = recommended_task
+            with lock:
+                current_emotion = emotion
+                current_task = recommended_task
                 
                 
-#                 cursor.execute(
-#                     "INSERT INTO mood_logs VALUES (NULL, ?, ?, ?, ?)",
-#                     (
-#                         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-#                         "EMP001",
-#                         emotion,
-#                         recommended_task
-#                     )
-#                 )
-#                 conn.commit()
+                cursor.execute(
+                    "INSERT INTO mood_logs VALUES (NULL, ?, ?, ?, ?)",
+                    (
+                        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "EMP001",
+                        emotion,
+                        recommended_task
+                    )
+                )
+                conn.commit()
                 
                 
-#                 if emotion in stress_emotions:
-#                     stress_count += 1
-#                 else:
-#                     stress_count = 0
+                if emotion in stress_emotions:
+                    stress_count += 1
+                else:
+                    stress_count = 0
                 
-#                 if stress_count >= 5:
-#                     alert_active = True
-#                     send_hr_alert("EMP001", emotion)
-#                     stress_count = 0
-#                 else:
-#                     alert_active = False
+                if stress_count >= 5:
+                    alert_active = True
+                    send_hr_alert("EMP001", emotion)
+                    stress_count = 0
+                else:
+                    alert_active = False
             
            
-#             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-#             cv2.putText(
-#                 frame, emotion, (x, y-10),
-#                 cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2
-#             )
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            cv2.putText(
+                frame, emotion, (x, y-10),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2
+            )
         
-#         ret, buffer = cv2.imencode('.jpg', frame)
-#         frame = buffer.tobytes()
-#         yield (b'--frame\r\n'
-#                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
     
-#     cap.release()
+    cap.release()
 
 @app.route('/')
 def landing():
@@ -186,12 +186,12 @@ def app_route():
 
 
 
-# @app.route('/video')
-# def video():
-#     return Response(
-#         generate_frames(),
-#         mimetype='multipart/x-mixed-replace; boundary=frame'
-#     )
+@app.route('/video')
+def video():
+    return Response(
+        generate_frames(),
+        mimetype='multipart/x-mixed-replace; boundary=frame'
+    )
 
 
 @app.route('/status')
@@ -285,34 +285,34 @@ def get_analytics():
     })
 
 # Newly Added Function
-@app.route("/predict", methods=["POST"])
-def predict():
-    global current_emotion, current_task, stress_count, alert_active
+# @app.route("/predict", methods=["POST"])
+# def predict():
+#     global current_emotion, current_task, stress_count, alert_active
 
-    data = request.json["image"]
-    encoded = data.split(",")[1]
-    decoded = base64.b64decode(encoded)
+#     data = request.json["image"]
+#     encoded = data.split(",")[1]
+#     decoded = base64.b64decode(encoded)
 
-    np_img = np.frombuffer(decoded, np.uint8)
-    frame = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
+#     np_img = np.frombuffer(decoded, np.uint8)
+#     frame = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+#     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+#     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-    for (x, y, w, h) in faces:
-        face = gray[y:y+h, x:x+w]
-        face = cv2.resize(face, (64, 64))
-        face = face / 255.0
-        face = face.reshape(1, 64, 64, 1)
+#     for (x, y, w, h) in faces:
+#         face = gray[y:y+h, x:x+w]
+#         face = cv2.resize(face, (64, 64))
+#         face = face / 255.0
+#         face = face.reshape(1, 64, 64, 1)
 
-        preds = emotion_model.predict(face, verbose=0)
-        emotion = emotion_labels[np.argmax(preds)]
+#         preds = emotion_model.predict(face, verbose=0)
+#         emotion = emotion_labels[np.argmax(preds)]
 
-        current_emotion = emotion
+#         current_emotion = emotion
 
-        return jsonify({"emotion": emotion})
+#         return jsonify({"emotion": emotion})
 
-    return jsonify({"emotion": "No face detected"})
+#     return jsonify({"emotion": "No face detected"})
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True, host='0.0.0.0', port=10000)

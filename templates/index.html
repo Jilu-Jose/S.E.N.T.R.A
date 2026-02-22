@@ -440,7 +440,7 @@
                     <h2 class="card-title">Live Emotion Detection</h2>
 
                     <!--This is the newly added code-->
-                    <div class="video-container">
+                    <!-- <div class="video-container">
     <video id="video" class="video-feed" autoplay playsinline></video>
     <canvas id="canvas" style="display:none;"></canvas>
 </div>
@@ -449,15 +449,15 @@
     <button onclick="captureFrame()" style="padding:10px 20px; background:#22c55e; border:none; border-radius:8px; color:white; cursor:pointer;">
         Detect Emotion
     </button>
-</div>
+</div> -->
 
 
 
 
 
-                    <!-- <div class="video-container">
+                    <div class="video-container">
                         <img src="/video" class="video-feed" alt="Live Video Feed">
-                    </div> -->
+                    </div>
                 </div>
 
                 <div class="info-panel">
@@ -842,41 +842,41 @@
 
 
 
-// Webcam Setup
-const video = document.getElementById("video");
+// // Webcam Setup
+// const video = document.getElementById("video");
 
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        video.srcObject = stream;
-    })
-    .catch(err => {
-        console.error("Camera error:", err);
-    });
+// navigator.mediaDevices.getUserMedia({ video: true })
+//     .then(stream => {
+//         video.srcObject = stream;
+//     })
+//     .catch(err => {
+//         console.error("Camera error:", err);
+//     });
 
-function captureFrame() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+// function captureFrame() {
+//     const canvas = document.getElementById("canvas");
+//     const ctx = canvas.getContext("2d");
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+//     canvas.width = video.videoWidth;
+//     canvas.height = video.videoHeight;
 
-    ctx.drawImage(video, 0, 0);
+//     ctx.drawImage(video, 0, 0);
 
-    const imageData = canvas.toDataURL("image/jpeg");
+//     const imageData = canvas.toDataURL("image/jpeg");
 
-    fetch("/predict", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ image: imageData })
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("current-emotion").textContent = data.emotion;
-    })
-    .catch(err => console.error("Prediction error:", err));
-}
+//     fetch("/predict", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({ image: imageData })
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//         document.getElementById("current-emotion").textContent = data.emotion;
+//     })
+//     .catch(err => console.error("Prediction error:", err));
+// }
 
 
 
