@@ -2,6 +2,7 @@
 
 A real-time Emotion Detection System that analyzes facial expressions using a deep learning model and logs detected emotions with timestamps in a local database. The project is built using Python and focuses on clean structure, reproducibility, and practical deployment.
 
+Live: https://s-e-n-t-r-a.onrender.com 
 ---
 
 ## Email Configuration (Important)
