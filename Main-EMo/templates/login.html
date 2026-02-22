@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.E.N.T.R.A - Login</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #000000;
@@ -122,6 +124,19 @@
             transition: all 0.3s ease;
         }
 
+        /* Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
         /* Login Container */
         .login-container {
             flex: 1;
@@ -129,6 +144,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            animation: fadeInScale 0.6s ease-out;
         }
 
         .login-card {
@@ -240,17 +256,17 @@
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <a href="/" class="logo">S.E.N.T.R.A</a>
+            <a href="/" class="logo"><i class="fa-solid fa-brain"></i> S.E.N.T.R.A</a>
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="nav-links" id="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/app" class="nav-link">App</a>
+                <a href="/" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="/app" class="nav-link"><i class="fa-solid fa-rocket"></i> App</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
-                    ☀️
+                    <i class="fa-solid fa-sun"></i>
                 </button>
             </div>
         </div>
@@ -261,14 +277,14 @@
             <h2>Welcome Back</h2>
             <form action="/app" method="GET">
                 <div class="form-group">
-                    <label for="email" class="form-label">Email Address</label>
+                    <label for="email" class="form-label"><i class="fa-solid fa-envelope"></i> Email Address</label>
                     <input type="email" id="email" class="form-control" placeholder="employee@example.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label"><i class="fa-solid fa-lock"></i> Password</label>
                     <input type="password" id="password" class="form-control" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn-login">Sign In</button>
+                <button type="submit" class="btn-login"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
                 <div class="alt-text">
                     Don't have an account? <a href="/app">Try Demo</a>
                 </div>
@@ -293,18 +309,20 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             root.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
+            themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
         }
 
         themeToggle.addEventListener('click', () => {
             if (root.getAttribute('data-theme') === 'light') {
                 root.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
             } else {
                 root.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
+                themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
             }
         });
     </script>

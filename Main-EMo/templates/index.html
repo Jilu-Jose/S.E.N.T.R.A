@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.E.N.T.R.A - Smart Emotion & Task Recommendation Analytics</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -404,19 +406,27 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="navbar-content">
-            <div class="logo">S.E.N.T.R.A</div>
+            <div class="logo"><i class="fa-solid fa-brain"></i> S.E.N.T.R.A</div>
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="nav-tabs" id="nav-tabs">
-                <a href="/" class="nav-tab" style="text-decoration: none; display: flex; align-items: center;">Home</a>
-                <button class="nav-tab active" onclick="showPage('detection')">Live Detection</button>
-                <button class="nav-tab" onclick="showPage('analytics')">Analytics</button>
-                <button class="nav-tab" onclick="showPage('history')">History</button>
+                <a href="/" class="nav-tab"
+                    style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i
+                        class="fa-solid fa-house"></i> Home</a>
+                <button class="nav-tab active" onclick="showPage('detection')"
+                    style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-video"></i> Live
+                    Detection</button>
+                <button class="nav-tab" onclick="showPage('analytics')"
+                    style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-chart-pie"></i>
+                    Analytics</button>
+                <button class="nav-tab" onclick="showPage('history')"
+                    style="display: flex; align-items: center; gap: 0.5rem;"><i
+                        class="fa-solid fa-clock-rotate-left"></i> History</button>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
-                    ☀️
+                    <i class="fa-solid fa-sun"></i>
                 </button>
             </div>
         </div>
@@ -457,6 +467,15 @@
                             <div>Employee ID: EMP001</div>
                             <div id="last-update">Last Update: --</div>
                         </div>
+                    </div>
+
+                    <!-- Recent Alerts Panel (New Feature) -->
+                    <div class="card" style="margin-top: 1rem; max-height: 220px; overflow-y: auto;">
+                        <h3 style="font-size: 1rem; margin-bottom: 0.8rem; color: #94a3b8;"><i
+                                class="fa-solid fa-bell"></i> Recent Stress Alerts</h3>
+                        <ul id="recent-alerts-list" style="list-style: none; padding: 0; font-size: 0.85rem;">
+                            <li style="padding: 0.5rem 0; color: #64748b; text-align: center;">Loading alerts...</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -530,18 +549,20 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             root.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
+            themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
         }
 
         themeToggle.addEventListener('click', () => {
             if (root.getAttribute('data-theme') === 'light') {
                 root.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
             } else {
                 root.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
+                themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
             }
         });
 
@@ -768,9 +789,39 @@
                 });
         }
 
+        // Load Recent Alerts
+        function loadRecentAlerts() {
+            fetch('/api/recent_alerts')
+                .then(res => res.json())
+                .then(data => {
+                    const list = document.getElementById('recent-alerts-list');
+                    if (list) {
+                        list.innerHTML = '';
+                        if (data.length === 0) {
+                            list.innerHTML = '<li style="padding: 0.5rem 0; color: #64748b; text-align: center;">No stress alerts detected yet.</li>';
+                            return;
+                        }
+                        data.forEach(item => {
+                            const timeStr = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            list.innerHTML += `
+                                <li style="padding: 0.6rem 0; border-bottom: 1px solid rgba(148, 163, 184, 0.1); display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="color: var(--text-color); font-weight: 500;">
+                                        <span style="color: #ef4444;"><i class="fa-solid fa-circle-exclamation"></i> ${item.emotion}</span>
+                                    </span>
+                                    <span style="color: #94a3b8; font-size: 0.8rem;">${timeStr}</span>
+                                </li>
+                            `;
+                        });
+                    }
+                })
+                .catch(err => console.error('Alerts error:', err));
+        }
+
         // Initialize
         setInterval(updateStatus, 1000);
+        setInterval(loadRecentAlerts, 5000);
         updateStatus();
+        loadRecentAlerts();
     </script>
 </body>
 

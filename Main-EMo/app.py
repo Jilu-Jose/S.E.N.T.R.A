@@ -223,6 +223,25 @@ def get_history():
     return jsonify(history)
 
 
+@app.route('/api/recent_alerts')
+def get_recent_alerts():
+    data = cursor.execute(
+        "SELECT * FROM mood_logs WHERE emotion IN ('Sad', 'Angry', 'Fear', 'Disgust') ORDER BY timestamp DESC LIMIT 5"
+    ).fetchall()
+    
+    alerts = []
+    for row in data:
+        alerts.append({
+            'id': row[0],
+            'timestamp': row[1],
+            'employee_id': row[2],
+            'emotion': row[3],
+            'task': row[4]
+        })
+    
+    return jsonify(alerts)
+
+
 @app.route('/api/analytics')
 def get_analytics():
   

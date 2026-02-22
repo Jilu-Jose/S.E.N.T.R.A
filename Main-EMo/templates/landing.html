@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.E.N.T.R.A - Landing</title>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #000000;
@@ -15,6 +18,7 @@
             --btn-hover: #16a34a;
             --nav-text: #e2e8f0;
         }
+
         [data-theme="light"] {
             --bg-color: #ffffff;
             --text-color: #0f172a;
@@ -122,7 +126,7 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .hamburger span {
             width: 25px;
             height: 3px;
@@ -131,14 +135,26 @@
             transition: all 0.3s ease;
         }
 
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Hero Section */
         .hero {
-            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 6rem 2rem 4rem 2rem;
+            min-height: 80vh;
         }
 
         .hero-content {
@@ -146,14 +162,15 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 1.5rem;
             color: var(--accent-color);
             line-height: 1.2;
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             margin-bottom: 2.5rem;
             opacity: 0.9;
             line-height: 1.6;
@@ -173,6 +190,9 @@
             border-radius: 12px;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-primary {
@@ -185,6 +205,7 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
             background-color: var(--btn-hover);
+            color: #ffffff;
         }
 
         .btn-secondary {
@@ -196,6 +217,134 @@
         .btn-secondary:hover {
             transform: translateY(-2px);
             background-color: rgba(34, 197, 94, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--card-bg);
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(148, 163, 184, 0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .step-reverse {
+            flex-direction: row-reverse;
+        }
+
+        .step-number {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .step-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .step-icon {
+            flex: 1;
+            text-align: center;
+            font-size: 8rem;
+            color: var(--accent-color);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            opacity: 0.8;
         }
 
         /* Responsive */
@@ -213,50 +362,136 @@
                 width: 100%;
                 background: var(--navbar-bg);
                 padding: 1.5rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 border-top: 1px solid rgba(148, 163, 184, 0.1);
             }
 
             .nav-links.show {
                 display: flex;
             }
-            
+
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .step-reverse {
+                flex-direction: column;
+            }
+
+            .step-icon {
+                font-size: 5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <a href="/" class="logo">S.E.N.T.R.A</a>
+            <a href="/" class="logo"><i class="fa-solid fa-brain"></i> S.E.N.T.R.A</a>
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <div class="nav-links" id="nav-links">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/login" class="nav-link">Login</a>
-                <a href="/app" class="nav-btn primary">Try without login</a>
+                <a href="/" class="nav-link"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="/login" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                <a href="/app" class="nav-btn primary"><i class="fa-solid fa-rocket"></i> App</a>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
-                    ☀️
+                    <i class="fa-solid fa-sun"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <main class="hero">
-        <div class="hero-content">
-            <h1>Smart Emotion & Task Recommendation Analytics</h1>
-            <p>Empowering workforce well-being through real-time emotion detection and intelligent task management. Keep stress in check and productivity soaring.</p>
-            <div class="hero-buttons">
-                <a href="/login" class="btn btn-primary">Get Started</a>
-                <a href="/app" class="btn btn-secondary">Try Demo Setup</a>
+    <main>
+        <section class="hero fade-in-up">
+            <div class="hero-content">
+                <h1>Smart Emotion & Task Recommendation Analytics</h1>
+                <p>Empowering workforce well-being through real-time emotion detection and intelligent task management.
+                    Keep stress in check and productivity soaring.</p>
+                <div class="hero-buttons">
+                    <a href="/login" class="btn btn-primary"><i class="fa-solid fa-user-check"></i> Get Started</a>
+                    <a href="/app" class="btn btn-secondary"><i class="fa-solid fa-play"></i> Try Demo Setup</a>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="features">
+            <div class="section-header fade-in-up">
+                <h2>Key Features</h2>
+                <p>Discover how S.E.N.T.R.A transforms the workplace by supporting your employees' mental well-being in
+                    real-time.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <i class="fa-solid fa-face-smile feature-icon"></i>
+                    <h3>Real-Time Detection</h3>
+                    <p>Advanced computer vision accurately detects subtle changes in employee emotion and detects stress
+                        early.</p>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.2s;">
+                    <i class="fa-solid fa-list-check feature-icon"></i>
+                    <h3>Smart Task Suggestions</h3>
+                    <p>AI-driven task recommendations based on current emotional states to optimize productivity without
+                        burning out.</p>
+                </div>
+                <div class="feature-card fade-in-up" style="transition-delay: 0.4s;">
+                    <i class="fa-solid fa-chart-line feature-icon"></i>
+                    <h3>Actionable Analytics</h3>
+                    <p>Comprehensive dashboard displaying emotional trends and hourly activity to help HR teams make
+                        data-driven decisions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <div class="section-header fade-in-up">
+                <h2>How It Works</h2>
+                <p>A seamless integration into your daily workflow to ensure constant care and monitoring.</p>
+            </div>
+            <div class="steps-container">
+                <div class="step fade-in-up">
+                    <div class="step-icon"><i class="fa-solid fa-video"></i></div>
+                    <div class="step-content">
+                        <div class="step-number">01</div>
+                        <h3>Continuous Monitoring</h3>
+                        <p>Our unobtrusive web-based camera analyzes facial expressions locally, prioritizing privacy
+                            while constantly measuring stress levels.</p>
+                    </div>
+                </div>
+                <div class="step step-reverse fade-in-up">
+                    <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                    <div class="step-content">
+                        <div class="step-number">02</div>
+                        <h3>Intelligent Processing</h3>
+                        <p>The system cross-references detected emotions with current workloads and deadlines to
+                            intelligently tailor ongoing tasks to the employee's mental state.</p>
+                    </div>
+                </div>
+                <div class="step fade-in-up">
+                    <div class="step-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                    <div class="step-content">
+                        <div class="step-number">03</div>
+                        <h3>Automated Interventions</h3>
+                        <p>If prolonged stress is detected, automated alerts are instantly generated and sent to HR,
+                            ensuring immediate support is provided.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 S.E.N.T.R.A. All rights reserved.</p>
+    </footer>
 
     <script>
         // Hamburger Menu Logic
@@ -275,20 +510,43 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             root.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
+            themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
         }
 
         themeToggle.addEventListener('click', () => {
             if (root.getAttribute('data-theme') === 'light') {
                 root.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
             } else {
                 root.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
+                themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
             }
+        });
+
+        // Scroll Animation Logic
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach((el) => {
+            observer.observe(el);
         });
     </script>
 </body>
+
 </html>
