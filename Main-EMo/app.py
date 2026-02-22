@@ -10,6 +10,10 @@ from database import conn, cursor
 import joblib
 import json
 from threading import Lock
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -42,7 +46,7 @@ face_cascade = cv2.CascadeClassifier(
 
 stress_emotions = ["Sad", "Angry", "Fear", "Disgust"]
 
-# Global state
+ 
 current_emotion = "Neutral"
 current_task = "No task assigned"
 stress_count = 0
@@ -64,13 +68,17 @@ def send_hr_alert(employee_id, emotion):
         """
     )
 
+    EMAIL_ID = os.getenv("EMAIL_ID")
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+    HR_EMAIL = os.getenv("HR_EMAIL")
+
     msg["Subject"] = "WARNING Stress Alert – S.E.N.T.R.A System: Employee needs assistance!!"
-    msg["From"] = "EMAIL_ID"
-    msg["To"] = "HR_EMAIL"
+    msg["From"] = EMAIL_ID # EMAIL_ID
+    msg["To"] = HR_EMAIL # HR_EMAIL
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            smtp.login("EMAIL_ID", "EMAIL_PASSWORD")
+            smtp.login(EMAIL_ID, EMAIL_PASSWORD) # EMAIL_PASSWORD
             smtp.send_message(msg)
     except Exception as e:
         print(f"Email error: {e}")
@@ -108,7 +116,7 @@ def generate_frames():
             working_hours = np.random.randint(6, 10)
             deadline_pressure = np.random.randint(2, 8)
             
-            
+
             task_input = pd.DataFrame([{
                 "Mood": mood_encoded,
                 "Current_Workload": current_workload,
@@ -163,8 +171,6 @@ def generate_frames():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
     
     cap.release()
-
-
 
 @app.route('/')
 def index():
