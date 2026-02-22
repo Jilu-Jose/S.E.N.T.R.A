@@ -1,4 +1,4 @@
-# EMO-DETECTION-AMDOX
+# S.E.N.T.R.A System
 
 A real-time Emotion Detection System that analyzes facial expressions using a deep learning model and logs detected emotions with timestamps in a local database. The project is built using Python and focuses on clean structure, reproducibility, and practical deployment.
 
