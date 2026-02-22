@@ -1,7 +1,10 @@
-streamlit
-opencv-python
+flask
+opencv-python-headless
 tensorflow
 numpy
 pandas
 scikit-learn
 joblib
+python-dotenv
+gunicorn
+pymysql 
