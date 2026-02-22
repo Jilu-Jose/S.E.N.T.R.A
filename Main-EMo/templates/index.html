@@ -1,33 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.E.N.T.R.A - Smart Emotion & Task Recommendation Analytics</title>
-    
+
     <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #e2e8f0;
+            --accent-color: #22c55e;
+            --navbar-bg: rgba(0, 0, 0, 0.95);
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --nav-text: #e2e8f0;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #0f172a;
+            --accent-color: #16a34a;
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(240, 240, 240, 0.8);
+            --nav-text: #0f172a;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
+            background: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
         }
 
         /* Navigation */
         .navbar {
-            background: rgba(15, 23, 42, 0.95);
+            background: var(--navbar-bg);
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--nav-text);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--nav-text);
+            border-radius: 3px;
+            transition: all 0.3s ease;
         }
 
         .navbar-content {
@@ -90,13 +139,20 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Cards */
         .card {
-            background: rgba(30, 41, 59, 0.7);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 1.5rem;
@@ -173,8 +229,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         .alert-title {
@@ -198,7 +261,7 @@
         }
 
         .chart-container {
-            background: rgba(30, 41, 59, 0.7);
+            background: var(--card-bg);
             border-radius: 16px;
             padding: 1.5rem;
             min-height: 300px;
@@ -247,13 +310,40 @@
             font-weight: 600;
         }
 
-        .emotion-Happy { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
-        .emotion-Neutral { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
-        .emotion-Sad { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-        .emotion-Angry { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-        .emotion-Fear { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
-        .emotion-Surprise { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
-        .emotion-Disgust { background: rgba(163, 230, 53, 0.2); color: #a3e635; }
+        .emotion-Happy {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .emotion-Neutral {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+
+        .emotion-Sad {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .emotion-Angry {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .emotion-Fear {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+        }
+
+        .emotion-Surprise {
+            background: rgba(251, 146, 60, 0.2);
+            color: #fb923c;
+        }
+
+        .emotion-Disgust {
+            background: rgba(163, 230, 53, 0.2);
+            color: #a3e635;
+        }
 
         /* Loading Spinner */
         .spinner {
@@ -267,18 +357,40 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .detection-grid {
-                grid-template-columns: 1fr;
+            .hamburger {
+                display: flex;
             }
 
             .nav-tabs {
-                flex-wrap: wrap;
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--navbar-bg);
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid rgba(148, 163, 184, 0.1);
+            }
+
+            .nav-tabs.show {
+                display: flex;
+            }
+
+            .detection-grid {
+                grid-template-columns: 1fr;
             }
 
             .analytics-grid {
@@ -287,15 +399,25 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="navbar-content">
             <div class="logo">S.E.N.T.R.A</div>
-            <div class="nav-tabs">
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-tabs" id="nav-tabs">
+                <a href="/" class="nav-tab" style="text-decoration: none; display: flex; align-items: center;">Home</a>
                 <button class="nav-tab active" onclick="showPage('detection')">Live Detection</button>
                 <button class="nav-tab" onclick="showPage('analytics')">Analytics</button>
                 <button class="nav-tab" onclick="showPage('history')">History</button>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    ☀️
+                </button>
             </div>
         </div>
     </nav>
@@ -343,7 +465,7 @@
         <!-- Analytics Dashboard Page -->
         <div id="analytics" class="page">
             <h1 style="margin-bottom: 2rem; font-size: 2rem;">Emotion Analytics Dashboard</h1>
-            
+
             <div class="analytics-grid">
                 <div class="card">
                     <h2 class="card-title">Emotion Distribution</h2>
@@ -377,9 +499,11 @@
                             </tr>
                         </thead>
                         <tbody id="history-body">
-                            <tr><td colspan="4" style="text-align: center;">
-                                <div class="spinner"></div>
-                            </td></tr>
+                            <tr>
+                                <td colspan="4" style="text-align: center;">
+                                    <div class="spinner"></div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -391,6 +515,36 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <script>
+        // Hamburger Menu Logic
+        const hamburger = document.getElementById('hamburger');
+        const navTabs = document.getElementById('nav-tabs');
+
+        hamburger.addEventListener('click', () => {
+            navTabs.classList.toggle('show');
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            root.setAttribute('data-theme', 'light');
+            themeToggle.textContent = '🌙';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (root.getAttribute('data-theme') === 'light') {
+                root.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                root.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+
         // Page Navigation
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -399,7 +553,7 @@
             document.querySelectorAll('.nav-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             document.getElementById(pageId).classList.add('active');
             event.target.classList.add('active');
 
@@ -417,9 +571,9 @@
                 .then(data => {
                     document.getElementById('current-emotion').textContent = data.emotion;
                     document.getElementById('current-task').textContent = data.task;
-                    document.getElementById('last-update').textContent = 
+                    document.getElementById('last-update').textContent =
                         'Last Update: ' + new Date().toLocaleTimeString();
-                    
+
                     const alertBox = document.getElementById('stress-alert');
                     if (data.alert) {
                         alertBox.classList.add('active');
@@ -446,7 +600,7 @@
 
         function createEmotionChart(data) {
             const ctx = document.getElementById('emotionChart');
-            
+
             if (emotionChart) {
                 emotionChart.destroy();
             }
@@ -488,7 +642,7 @@
 
         function createTrendChart(data) {
             const ctx = document.getElementById('trendChart');
-            
+
             if (trendChart) {
                 trendChart.destroy();
             }
@@ -534,7 +688,7 @@
 
         function createHourlyChart(data) {
             const ctx = document.getElementById('hourlyChart');
-            
+
             if (hourlyChart) {
                 hourlyChart.destroy();
             }
@@ -609,7 +763,7 @@
                 })
                 .catch(err => {
                     console.error('History error:', err);
-                    document.getElementById('history-body').innerHTML = 
+                    document.getElementById('history-body').innerHTML =
                         '<tr><td colspan="4" style="text-align: center; color: #ef4444;">Error loading history</td></tr>';
                 });
         }
@@ -619,4 +773,5 @@
         updateStatus();
     </script>
 </body>
+
 </html>
