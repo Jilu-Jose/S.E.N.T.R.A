@@ -439,24 +439,14 @@
                 <div class="card">
                     <h2 class="card-title">Live Emotion Detection</h2>
 
-                    <!--This is the newly added code-->
-                    <!-- <div class="video-container">
-    <video id="video" class="video-feed" autoplay playsinline></video>
-    <canvas id="canvas" style="display:none;"></canvas>
-</div>
-
-<div style="margin-top: 1rem; text-align:center;">
-    <button onclick="captureFrame()" style="padding:10px 20px; background:#22c55e; border:none; border-radius:8px; color:white; cursor:pointer;">
-        Detect Emotion
-    </button>
-</div> -->
-
-
-
-
-
-                    <div class="video-container">
-                        <img src="/video" class="video-feed" alt="Live Video Feed">
+                    <div class="video-container" style="position: relative;">
+                        <video id="client-video" autoplay playsinline style="display:none;"></video>
+                        <img id="processed-video" class="video-feed" alt="Live Video Feed" src="">
+                        <canvas id="client-canvas" style="display:none;"></canvas>
+                        <div id="camera-loading"
+                            style="position:absolute; top:50%; width:100%; text-align:center; color:#94a3b8; transform: translateY(-50%); font-size: 1.1rem;">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Requesting camera access...
+                        </div>
                     </div>
                 </div>
 
@@ -842,41 +832,79 @@
 
 
 
-// // Webcam Setup
-// const video = document.getElementById("video");
+        // Webcam Setup and Frame Processing Loop
+        const clientVideo = document.getElementById('client-video');
+        const processedVideo = document.getElementById('processed-video');
+        const clientCanvas = document.getElementById('client-canvas');
+        const cameraLoading = document.getElementById('camera-loading');
+        let isProcessingFrame = false;
 
-// navigator.mediaDevices.getUserMedia({ video: true })
-//     .then(stream => {
-//         video.srcObject = stream;
-//     })
-//     .catch(err => {
-//         console.error("Camera error:", err);
-//     });
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 } } })
+                .then(stream => {
+                    clientVideo.srcObject = stream;
+                    clientVideo.play();
+                    cameraLoading.style.display = 'none';
 
-// function captureFrame() {
-//     const canvas = document.getElementById("canvas");
-//     const ctx = canvas.getContext("2d");
+                    clientVideo.addEventListener('play', () => {
+                        sendFrameLoop();
+                    });
+                })
+                .catch(err => {
+                    console.error("Camera access denied or error:", err);
+                    cameraLoading.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color:#ef4444;"></i> Camera access denied or not available.';
+                });
+        } else {
+            cameraLoading.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color:#ef4444;"></i> Your browser does not support webcam access.';
+        }
 
-//     canvas.width = video.videoWidth;
-//     canvas.height = video.videoHeight;
+        function sendFrameLoop() {
+            if (clientVideo.paused || clientVideo.ended) return;
 
-//     ctx.drawImage(video, 0, 0);
+            if (!isProcessingFrame) {
+                processAndSendFrame();
+            }
 
-//     const imageData = canvas.toDataURL("image/jpeg");
+            // Limit to roughly 10-15 FPS to avoid overloading the server
+            setTimeout(() => {
+                requestAnimationFrame(sendFrameLoop);
+            }, 100);
+        }
 
-//     fetch("/predict", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ image: imageData })
-//     })
-//     .then(res => res.json())
-//     .then(data => {
-//         document.getElementById("current-emotion").textContent = data.emotion;
-//     })
-//     .catch(err => console.error("Prediction error:", err));
-// }
+        function processAndSendFrame() {
+            if (!clientVideo.videoWidth) return; // Wait for video to have dimensions
+
+            isProcessingFrame = true;
+            const ctx = clientCanvas.getContext('2d');
+            clientCanvas.width = clientVideo.videoWidth;
+            clientCanvas.height = clientVideo.videoHeight;
+            ctx.drawImage(clientVideo, 0, 0, clientCanvas.width, clientCanvas.height);
+
+            const imgData = clientCanvas.toDataURL('image/jpeg', 0.6); // Quality 0.6
+
+            fetch('/process_frame', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image: imgData })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.image) {
+                        processedVideo.src = data.image;
+                    }
+                    if (data.emotion && data.emotion !== "Neutral") {
+                        document.getElementById('current-emotion').textContent = data.emotion;
+                    }
+                    if (data.task && data.task !== "No task assigned") {
+                        document.getElementById('current-task').textContent = data.task;
+                    }
+                    isProcessingFrame = false;
+                })
+                .catch(err => {
+                    console.error('Frame processing error:', err);
+                    isProcessingFrame = false;
+                });
+        }
 
 
 

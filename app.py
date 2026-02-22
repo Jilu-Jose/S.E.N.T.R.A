@@ -11,6 +11,7 @@ import joblib
 import json
 from threading import Lock
 import os
+import base64
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -84,20 +85,26 @@ def send_hr_alert(employee_id, emotion):
         print(f"Email error: {e}")
 
 
-def generate_frames():
+@app.route('/process_frame', methods=['POST'])
+def process_frame():
     global current_emotion, current_task, stress_count, alert_active
     
-    cap = cv2.VideoCapture(0)
-    
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
+    try:
+        data = request.json
+        if not data or 'image' not in data:
+            return jsonify({'error': 'No image data'}), 400
             
+        image_data = data['image'].split(',')[1]
+        nparr = np.frombuffer(base64.b64decode(image_data), np.uint8)
+        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         
+        face_detected = False
+        
         for (x, y, w, h) in faces:
+            face_detected = True
             face = gray[y:y+h, x:x+w]
             face = cv2.resize(face, (64, 64))
             face = face / 255.0
@@ -106,16 +113,13 @@ def generate_frames():
             preds = emotion_model.predict(face, verbose=0)
             emotion = emotion_labels[np.argmax(preds)]
             
-            
             mapped_mood = emotion_to_mood[emotion]
             mood_encoded = mood_encoder.transform([mapped_mood])[0]
             
-           
             current_workload = np.random.randint(3, 8)
             sleeping_hours = np.random.randint(5, 9)
             working_hours = np.random.randint(6, 10)
             deadline_pressure = np.random.randint(2, 8)
-            
 
             task_input = pd.DataFrame([{
                 "Mood": mood_encoded,
@@ -128,11 +132,9 @@ def generate_frames():
             task_encoded = task_model.predict(task_input)
             recommended_task = task_encoder.inverse_transform(task_encoded)[0]
             
-        
             with lock:
                 current_emotion = emotion
                 current_task = recommended_task
-                
                 
                 cursor.execute(
                     "INSERT INTO mood_logs VALUES (NULL, ?, ?, ?, ?)",
@@ -144,7 +146,6 @@ def generate_frames():
                     )
                 )
                 conn.commit()
-                
                 
                 if emotion in stress_emotions:
                     stress_count += 1
@@ -158,19 +159,23 @@ def generate_frames():
                 else:
                     alert_active = False
             
-           
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
             cv2.putText(
                 frame, emotion, (x, y-10),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2
             )
         
-        ret, buffer = cv2.imencode('.jpg', frame)
-        frame = buffer.tobytes()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-    
-    cap.release()
+        _, buffer = cv2.imencode('.jpg', frame)
+        processed_img_base64 = base64.b64encode(buffer).decode('utf-8')
+        
+        return jsonify({
+            'image': 'data:image/jpeg;base64,' + processed_img_base64,
+            'emotion': current_emotion if face_detected else "Neutral",
+            'task': current_task if face_detected else "No task assigned"
+        })
+    except Exception as e:
+        print(f"Error processing frame: {e}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/')
 def landing():
@@ -183,15 +188,6 @@ def login():
 @app.route('/app')
 def app_route():
     return render_template("index.html")
-
-
-
-@app.route('/video')
-def video():
-    return Response(
-        generate_frames(),
-        mimetype='multipart/x-mixed-replace; boundary=frame'
-    )
 
 
 @app.route('/status')
