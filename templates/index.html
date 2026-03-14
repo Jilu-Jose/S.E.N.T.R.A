@@ -865,10 +865,10 @@
                 processAndSendFrame();
             }
 
-            // Limit to roughly 10-15 FPS to avoid overloading the server
+            // Limit to roughly 3 FPS to avoid overloading the deployed server
             setTimeout(() => {
                 requestAnimationFrame(sendFrameLoop);
-            }, 100);
+            }, 300);
         }
 
         function processAndSendFrame() {
@@ -876,9 +876,14 @@
 
             isProcessingFrame = true;
             const ctx = clientCanvas.getContext('2d');
-            clientCanvas.width = clientVideo.videoWidth;
-            clientCanvas.height = clientVideo.videoHeight;
-            ctx.drawImage(clientVideo, 0, 0, clientCanvas.width, clientCanvas.height);
+            
+            // Downscale the image to reduce payload size and server processing time
+            const targetWidth = 320;
+            const targetHeight = (clientVideo.videoHeight / clientVideo.videoWidth) * targetWidth;
+            
+            clientCanvas.width = targetWidth;
+            clientCanvas.height = targetHeight;
+            ctx.drawImage(clientVideo, 0, 0, targetWidth, targetHeight);
 
             const imgData = clientCanvas.toDataURL('image/jpeg', 0.6); // Quality 0.6
 

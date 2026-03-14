@@ -53,6 +53,7 @@ current_task = "No task assigned"
 stress_count = 0
 alert_active = False
 lock = Lock()
+last_log_time = datetime.now()
 
 
 def send_hr_alert(employee_id, emotion):
@@ -87,7 +88,7 @@ def send_hr_alert(employee_id, emotion):
 
 @app.route('/process_frame', methods=['POST'])
 def process_frame():
-    global current_emotion, current_task, stress_count, alert_active
+    global current_emotion, current_task, stress_count, alert_active, last_log_time
     
     try:
         data = request.json
@@ -136,16 +137,22 @@ def process_frame():
                 current_emotion = emotion
                 current_task = recommended_task
                 
-                cursor.execute(
-                    "INSERT INTO mood_logs VALUES (NULL, ?, ?, ?, ?)",
-                    (
-                        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "EMP001",
-                        emotion,
-                        recommended_task
-                    )
-                )
-                conn.commit()
+                now = datetime.now()
+                if (now - last_log_time).total_seconds() >= 2:
+                    try:
+                        cursor.execute(
+                            "INSERT INTO mood_logs VALUES (NULL, ?, ?, ?, ?)",
+                            (
+                                now.strftime("%Y-%m-%d %H:%M:%S"),
+                                "EMP001",
+                                emotion,
+                                recommended_task
+                            )
+                        )
+                        conn.commit()
+                        last_log_time = now
+                    except Exception as db_err:
+                        print(f"DB Insert Error: {db_err}")
                 
                 if emotion in stress_emotions:
                     stress_count += 1

@@ -1,6 +1,6 @@
 flask
 opencv-python-headless
-tensorflow-cpu==2.15.0
+tensorflow-cpu
 numpy
 pandas
 scikit-learn
