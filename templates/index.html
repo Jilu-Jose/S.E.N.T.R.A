@@ -860,21 +860,15 @@
 
         function sendFrameLoop() {
             if (clientVideo.paused || clientVideo.ended) return;
-
-            if (!isProcessingFrame) {
-                processAndSendFrame();
-            }
-
-            // Limit to roughly 3 FPS to avoid overloading the deployed server
-            setTimeout(() => {
-                requestAnimationFrame(sendFrameLoop);
-            }, 300);
+            processAndSendFrame();
         }
 
         function processAndSendFrame() {
-            if (!clientVideo.videoWidth) return; // Wait for video to have dimensions
+            if (!clientVideo.videoWidth) {
+                setTimeout(() => requestAnimationFrame(sendFrameLoop), 500);
+                return;
+            }
 
-            isProcessingFrame = true;
             const ctx = clientCanvas.getContext('2d');
             
             // Downscale the image to reduce payload size and server processing time
@@ -892,7 +886,10 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ image: imgData })
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error('Server error: ' + res.status);
+                    return res.json();
+                })
                 .then(data => {
                     if (data.image) {
                         processedVideo.src = data.image;
@@ -903,11 +900,13 @@
                     if (data.task && data.task !== "No task assigned") {
                         document.getElementById('current-task').textContent = data.task;
                     }
-                    isProcessingFrame = false;
+                    // Wait 300ms before sending the NEXT frame
+                    setTimeout(() => requestAnimationFrame(sendFrameLoop), 300);
                 })
                 .catch(err => {
                     console.error('Frame processing error:', err);
-                    isProcessingFrame = false;
+                    // On error (e.g timeout), wait 2 seconds before retrying
+                    setTimeout(() => requestAnimationFrame(sendFrameLoop), 2000);
                 });
         }
 

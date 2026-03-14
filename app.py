@@ -111,7 +111,7 @@ def process_frame():
             face = face / 255.0
             face = face.reshape(1, 64, 64, 1)
             
-            preds = emotion_model.predict(face, verbose=0)
+            preds = emotion_model(face, training=False).numpy()
             emotion = emotion_labels[np.argmax(preds)]
             
             mapped_mood = emotion_to_mood[emotion]
